@@ -14,9 +14,5 @@ namespace ContosoUniversity.Models
 
 
         public ICollection<Enrollment> Enrollments { get; set; }
-
-        [StringLength(100)]
-        [Display(Name = "E-mail")]
-        public string Email { get; set; }
     }
 }

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity", "campo-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity-v2", "campo-obrigatorio\university-v2\ContosoUniversity-v2.csproj", "{E1ACFE26-6392-4EEE-AFE4-4D1D0D78775D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContosoUniversity-v3", "campo-obrigatorio\university-v3\ContosoUniversity-v3.csproj", "{295A9F85-6887-4DEE-A00F-FC90489413C5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "campo-obrigatorio", "campo-obrigatorio", "{38E5AFD5-BC7F-4551-8677-978DF35F7164}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{E1ACFE26-6392-4EEE-AFE4-4D1D0D78775D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1ACFE26-6392-4EEE-AFE4-4D1D0D78775D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1ACFE26-6392-4EEE-AFE4-4D1D0D78775D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{295A9F85-6887-4DEE-A00F-FC90489413C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{295A9F85-6887-4DEE-A00F-FC90489413C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{295A9F85-6887-4DEE-A00F-FC90489413C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{295A9F85-6887-4DEE-A00F-FC90489413C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,7 +30,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{440C3113-185D-4345-9910-27EA2084E3E1} = {38E5AFD5-BC7F-4551-8677-978DF35F7164}
 		{E1ACFE26-6392-4EEE-AFE4-4D1D0D78775D} = {38E5AFD5-BC7F-4551-8677-978DF35F7164}
-		{295A9F85-6887-4DEE-A00F-FC90489413C5} = {38E5AFD5-BC7F-4551-8677-978DF35F7164}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FF81A6A-278F-4ECA-9473-5C8F77A1ABDB}

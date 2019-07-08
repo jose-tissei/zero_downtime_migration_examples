@@ -2,7 +2,7 @@
 
 namespace ContosoUniversity.Migrations
 {
-    public partial class StudentEmail : Migration
+    public partial class PersonEmail : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

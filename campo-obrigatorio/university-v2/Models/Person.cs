@@ -25,5 +25,9 @@ namespace ContosoUniversity.Models
                 return LastName + ", " + FirstMidName;
             }
         }
+
+        [StringLength(100)]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
     }
 }

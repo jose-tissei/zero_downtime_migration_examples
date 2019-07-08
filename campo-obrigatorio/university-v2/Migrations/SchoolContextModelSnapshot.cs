@@ -119,6 +119,9 @@ namespace ContosoUniversity.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(100);
+
                     b.Property<string>("FirstMidName")
                         .IsRequired()
                         .HasColumnName("FirstName")
@@ -149,9 +152,6 @@ namespace ContosoUniversity.Migrations
             modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
                 {
                     b.HasBaseType("ContosoUniversity.Models.Person");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(100);
 
                     b.Property<DateTime>("EnrollmentDate");
 

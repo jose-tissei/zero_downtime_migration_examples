@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContosoUniversity.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20190708140337_Student-Email-Required")]
-    partial class StudentEmailRequired
+    [Migration("20190708181647_Person-Email")]
+    partial class PersonEmail
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,6 +121,9 @@ namespace ContosoUniversity.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(100);
+
                     b.Property<string>("FirstMidName")
                         .IsRequired()
                         .HasColumnName("FirstName")
@@ -151,10 +154,6 @@ namespace ContosoUniversity.Migrations
             modelBuilder.Entity("ContosoUniversity.Models.Student", b =>
                 {
                     b.HasBaseType("ContosoUniversity.Models.Person");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100);
 
                     b.Property<DateTime>("EnrollmentDate");
 
