@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Data
 {
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Console;
+
     public class SchoolContext : DbContext
     {
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options)
@@ -18,11 +21,15 @@ namespace ContosoUniversity.Data
         public DbSet<CourseAssignment> CourseAssignments { get; set; }
         public DbSet<Person> People { get; set; }
 
+        public static readonly LoggerFactory MyLoggerFactory
+            = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>().ToTable("Course");
             modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
-            modelBuilder.Entity<Student>().ToTable("Student").Property(p => p.Email).HasMaxLength(100).HasDefaultValue("empty").IsRequired();
+            modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Department>().ToTable("Department");
             modelBuilder.Entity<Instructor>().ToTable("Instructor");
             modelBuilder.Entity<OfficeAssignment>().ToTable("OfficeAssignment");
@@ -31,6 +38,12 @@ namespace ContosoUniversity.Data
 
             modelBuilder.Entity<CourseAssignment>()
                 .HasKey(c => new { c.CourseID, c.InstructorID });
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(MyLoggerFactory);
+            optionsBuilder.EnableSensitiveDataLogging();
         }
     }
 }

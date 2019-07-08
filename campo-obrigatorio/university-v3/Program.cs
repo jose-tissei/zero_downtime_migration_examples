@@ -12,6 +12,8 @@ using ContosoUniversity.Data;
 
 namespace ContosoUniversity
 {
+    using Microsoft.EntityFrameworkCore;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -24,6 +26,7 @@ namespace ContosoUniversity
                 try
                 {
                     var context = services.GetRequiredService<SchoolContext>();
+                    context.Database.Migrate();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
