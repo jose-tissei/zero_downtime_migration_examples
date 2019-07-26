@@ -120,7 +120,6 @@ namespace ContosoUniversity.Migrations
                         .IsRequired();
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<string>("FirstMidName")

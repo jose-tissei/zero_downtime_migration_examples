@@ -26,8 +26,6 @@ namespace ContosoUniversity.Models
             }
         }
 
-        // TODO: Descomentar, mas as migrations não rodam com esse required
-        // [Required]
         [StringLength(100)]
         [Display(Name = "E-mail")]
         public string Email { get; set; }

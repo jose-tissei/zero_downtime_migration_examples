@@ -1,38 +1,36 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using ContosoUniversity.Data;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ContosoUniversity.Migrations
 {
-    /// <inheritdoc />
+    using System;
+
     /// <summary>
-    /// The person email fill empty.
+    /// The student email fill empty.
     /// </summary>
     public partial class PersonEmailFillEmpty : Migration
     {
-        private const int AMOUNT_PER_ITERATION = 100;
-        private const string PLACEHOLDER = "empty";
-
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             using (var context = new DesignTimeSchoolContext().CreateDbContext(new string[] { }))
             {
+                const int AmountPerIteration = 100;
                 var total = context.People.Count();
-                var iterations = Math.Ceiling((decimal)total / AMOUNT_PER_ITERATION);
+                var iterations = Math.Ceiling((decimal)total / AmountPerIteration);
 
                 for (var i = 0; i < iterations; i++)
                 {
-                    var students = context
+                    var people = context
                         .People
                         .OrderBy(x => x.ID)
-                        .Skip(i * AMOUNT_PER_ITERATION)
-                        .Take(AMOUNT_PER_ITERATION)
+                        .Skip(i * AmountPerIteration)
+                        .Take(AmountPerIteration)
                         .Where(x => x.Email == null || x.Email == string.Empty)
                         .ToList();
 
-                    students.ForEach(x => x.Email = PLACEHOLDER);
-                    context.People.UpdateRange(students);
+                    people.ForEach(x => x.Email = "empty");
+                    context.People.UpdateRange(people);
                     context.SaveChanges();
                 }
             }
@@ -42,21 +40,22 @@ namespace ContosoUniversity.Migrations
         {
             using (var context = new DesignTimeSchoolContext().CreateDbContext(new string[] { }))
             {
+                const int AmountPerIteration = 100;
                 var total = context.People.Count();
-                var iterations = Math.Ceiling((decimal)total / AMOUNT_PER_ITERATION);
+                var iterations = Math.Ceiling((decimal)total / AmountPerIteration);
 
                 for (var i = 0; i < iterations; i++)
                 {
-                    var students = context
+                    var people = context
                         .People
                         .OrderBy(x => x.ID)
-                        .Skip(i * AMOUNT_PER_ITERATION)
-                        .Take(AMOUNT_PER_ITERATION)
-                        .Where(x => x.Email == PLACEHOLDER)
+                        .Skip(i * AmountPerIteration)
+                        .Take(AmountPerIteration)
+                        .Where(x => x.Email == "empty")
                         .ToList();
 
-                    students.ForEach(x => x.Email = null);
-                    context.People.UpdateRange(students);
+                    people.ForEach(x => x.Email = null);
+                    context.People.UpdateRange(people);
                     context.SaveChanges();
                 }
             }
