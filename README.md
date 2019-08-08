@@ -7,6 +7,7 @@ Neste exemplo utilizamos uma aplicação que representa o cadastro de professore
 Nosso objetivo é adicionar um novo campo `E-mail` na entidade `Person`, que deve ser obrigatório para `Instructor` e `Student`, para garantir `Downtime Zero` e `Rollback Imediato`, toda nova versão deve funcionar em conjunto com a versão antiga, logo para que isso seja possivel devemos dividir nossas alterações em 4 versões(ou deploys).
 
 **Referências:** Migrating to Microservice Databases - From Relational Monolith to Distributed Data, Edson Yanaga. (Livro está contido no repositório em /referencias)
+
 Obs.: O livro é gratuito!
 
 Segue abaixo quais os passos executados em cada uma dessas versões:
