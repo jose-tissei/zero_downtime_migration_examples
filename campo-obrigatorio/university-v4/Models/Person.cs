@@ -26,14 +26,9 @@ namespace ContosoUniversity.Models
             }
         }
 
+        [Required]
         [StringLength(100)]
         [Display(Name = "E-mail")]
-        public string Email 
-        { 
-            get => email;
-            set => email = string.IsNullOrEmpty(value) ? "Valor Padrão" : value;
-        }
-
-        private string email;
+        public string Email { get; set; }
     }
 }
