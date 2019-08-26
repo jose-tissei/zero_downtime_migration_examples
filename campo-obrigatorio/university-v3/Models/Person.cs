@@ -5,6 +5,8 @@ namespace ContosoUniversity.Models
 {
     public abstract class Person
     {
+        private string _email;
+
         public int ID { get; set; }
 
         [Required]
@@ -30,10 +32,8 @@ namespace ContosoUniversity.Models
         [Display(Name = "E-mail")]
         public string Email 
         { 
-            get => email;
-            set => email = string.IsNullOrEmpty(value) ? "Valor Padrão" : value;
+            get => _email;
+            set => _email = string.IsNullOrEmpty(value) ? "Valor Padrão" : value;
         }
-
-        private string email;
     }
 }
