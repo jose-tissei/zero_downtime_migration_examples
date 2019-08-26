@@ -70,7 +70,8 @@ public partial class InstructorSeed : Migration
 
 ### ContosoUniversity - V2
 
-Para garantir a retrocompatibilidade com a versão anterior e garantir que possamos fazer um rollback imediato primeiro devemos adicionar o campo email como opcional(nullable) na entidade `Person` e também adicionar os inputs para esse campo nos formulários assim como também na listagem de professores, para isso foi criada a migration `20190708181647_Person-Email.cs`.
+Para garantir a retrocompatibilidade com a versão anterior e garantir que possamos fazer um rollback imediato primeiro devemos adicionar o campo email como opcional(nullable) na entidade `Person` e também adicionar os inputs para esse campo nos formulários assim como também na listagem de professores, para isso foi criada a migration `20190708181647_Person-Email.cs`,
+devemos garantir que todas as entidades manipuladas pelo usuário também insiram um valor padrão caso o campo `Email` esteja nulo, logo a classe `Person.cs` foi alterada para garantir esse comportamento.
 
 ```csharp
     public partial class PersonEmail : Migration
@@ -93,16 +94,24 @@ Para garantir a retrocompatibilidade com a versão anterior e garantir que possa
     }
 ```
 
-Para gerar a migration acima foi adicionado a classe `Person.cs` o campo Email.
+Para gerar a migration acima foi adicionado a classe `Person.cs` o campo Email com um tratamento para garantir que valores nulos não possam ser inseridos.
+`Person.cs`
 ```csharp
         [StringLength(100)]
         [Display(Name = "E-mail")]
-        public string Email { get; set; }
+        public string Email 
+        { 
+            get => email;
+            set => email = string.IsNullOrEmpty(value) ? "Valor Padrão" : value;
+        }
+
+        private string email;
+
 ```
 
 ### ContosoUniversity - V3
 
-Antes de tornar o campo obrigatório precisamos garantir que todos os registros do banco tenham um valor para o campo `Email`, para isso foi criada a migration `20190708213344_Person-Email-Fill-Empty.cs` que é responsavél por setar um valor padrão para esse campo em todas as entidades, para garantir que não serão gerados locks de grande duração na base de dados a rotina responsável por setar este valor padrão é executada em batches contendo 100 registros por vez, em conjunto também devemos garantir que todas as entidades manipuladas pelo usuário também insiram um valor padrão caso o campo `Email` esteja nulo, logo a classe `Person.cs` foi alterada para garantir esse comportamento.
+Antes de tornar o campo obrigatório precisamos garantir que todos os registros do banco tenham um valor para o campo `Email`, para isso foi criada a migration `20190708213344_Person-Email-Fill-Empty.cs` que é responsavél por setar um valor padrão para esse campo em todas as entidades, para garantir que não serão gerados locks de grande duração na base de dados a rotina responsável por setar este valor padrão é executada em batches contendo 100 registros por vez.
 
 
 `20190708213344_Person-Email-Fill-Empty.cs`
@@ -159,21 +168,6 @@ Antes de tornar o campo obrigatório precisamos garantir que todos os registros 
             }
         }
     }
-```
-
-
-`Person.cs`
-```csharp
-        [StringLength(100)]
-        [Display(Name = "E-mail")]
-        public string Email 
-        { 
-            get => email;
-            set => email = string.IsNullOrEmpty(value) ? "Valor Padrão" : value;
-        }
-
-        private string email;
-
 ```
 
 ### ContosoUniversity - V4
